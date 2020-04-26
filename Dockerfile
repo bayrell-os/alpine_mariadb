@@ -21,4 +21,5 @@ RUN cd ~; \
 	echo "Ok"
 
 
-CMD ["/root/run.sh"]
+ENTRYPOINT ["/root/run.sh"]
+CMD []

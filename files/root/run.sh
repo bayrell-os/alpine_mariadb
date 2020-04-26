@@ -38,11 +38,11 @@ if [ ! -d /data/mysql ]; then
 	echo "Sleep 10 sec"
 	sleep 10
 	
-	if [ ! -z $MYSQL_USERNAME ] && [ ! -z $MYSQL_PASSWORD ]; then
+	if [ ! -z $MYSQL_ROOT_USERNAME ] && [ ! -z $MYSQL_ROOT_PASSWORD ]; then
 		
 		echo "Setup user"
-		mysql -u root -e "CREATE USER '${MYSQL_USERNAME}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
-		mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USERNAME}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
+		mysql -u root -e "CREATE USER '${MYSQL_ROOT_USERNAME}'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
+		mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_ROOT_USERNAME}'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
 		mysql -u root -e "flush privileges;"
 		
 	fi
@@ -64,7 +64,7 @@ fi
 echo "Start MySQL"
 
 # Run MySQL
-mysql_run
+mysql_run $*
 
 # Stop MySQL
 echo "Stop MySQL"
