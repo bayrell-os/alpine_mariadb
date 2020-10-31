@@ -22,41 +22,45 @@ function mysql_run {
 # Setup MySQL
 if [ ! -d /data/mysql ]; then
 	
-	echo "Setup MySQL"
+	mkdir -p /data
+	
+	echo "Setup MySQL" >> /data/install.log
 	
 	mkdir -p /data/mysql
 	chown mysql:mysql /data/mysql
 	rm -rf /var/lib/mysql
 	ln -s /data/mysql /var/lib/mysql
 	
-	echo "Install db"
-	/usr/bin/mysql_install_db --datadir=/data/mysql --user=mysql
+	echo "Install db" >> /data/install.log
+	/usr/bin/mysql_install_db --datadir=/data/mysql --user=mysql >> /data/install.log 2>&1
 	
-	echo "Start MySQL"
+	echo "Start MySQL" >> /data/install.log
 	mysql_run &
 	
-	echo "Sleep 10 sec"
+	echo "Sleep 10 sec" >> /data/install.log
 	sleep 10
 	
 	if [ ! -z $MYSQL_ROOT_USERNAME ] && [ ! -z $MYSQL_ROOT_PASSWORD ]; then
 		
-		echo "Setup user"
-		mysql -u root -e "CREATE USER '${MYSQL_ROOT_USERNAME}'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
-		mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_ROOT_USERNAME}'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
-		mysql -u root -e "flush privileges;"
+		echo "Setup user" >> /data/install.log
+		mysql -h localhost -u root -e "CREATE USER '${MYSQL_ROOT_USERNAME}'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';" >> /data/install.log 2>&1
+		mysql -h localhost -u root -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_ROOT_USERNAME}'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';" >> /data/install.log 2>&1
+		mysql -h localhost -u root -e "flush privileges;" >> /data/install.log 2>&1
 		
 	fi
 	
-	echo "Stop MySQL"
-	mysql -u root -e "shutdown"
+	echo "Stop MySQL" >> /data/install.log
+	mysql -h localhost -u root -e "shutdown" >> /data/install.log 2>&1
 	
-	echo "Sleep 10 sec"
+	echo "Sleep 10 sec" >> /data/install.log
 	sleep 10
 	
 	if [ -f /data/mysql/run.pid ]; then
 		kill -s 9 `cat /data/mysql/run.pid`
 		sleep 10
 	fi
+	
+	echo "Install completed" >> /data/install.log
 	
 fi
 
