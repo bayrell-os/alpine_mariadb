@@ -28,7 +28,7 @@ docker volume create mariadb_data
 
 Run
 ```
-docker run -d -e MYSQL_ROOT_PASSWORD=mysqlrootpassword \
+docker run -d -e MYSQL_ROOT_USERNAME=root -e MYSQL_ROOT_PASSWORD=mysqlrootpassword \
 	--name mariadb --log-driver=journald --restart=unless-stopped \
 	-v mariadb_data:/data --ip=172.20.0.5 --network="dockernet" bayrell/alpine_mariadb:10.4 \
 	--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci \
