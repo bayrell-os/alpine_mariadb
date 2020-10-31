@@ -35,15 +35,17 @@ case "$1" in
 	;;
 	
 	manifest)
-		docker manifest create bayrell/alpine_mariadb:10.4-$VERSION \
-			--amend bayrell/alpine_mariadb:10.4-$VERSION-amd64 \
-			--amend bayrell/alpine_mariadb:10.4-$VERSION-arm32v7
-		docker manifest push bayrell/alpine_mariadb:10.4-$VERSION
+		#rm -rf ~/.docker/manifests/docker.io_bayrell_alpine_mariadb*
 		
-		docker manifest create bayrell/alpine_mariadb:10.4 \
-			--amend bayrell/alpine_mariadb:10.4-$VERSION-amd64 \
-			--amend bayrell/alpine_mariadb:10.4-$VERSION-arm32v7
-		docker manifest push bayrell/alpine_mariadb:10.4
+		docker manifest create --amend bayrell/alpine_mariadb:10.4-$VERSION \
+			bayrell/alpine_mariadb:10.4-$VERSION-amd64 \
+			bayrell/alpine_mariadb:10.4-$VERSION-arm32v7
+		docker manifest push --purge bayrell/alpine_mariadb:10.4-$VERSION
+		
+		docker manifest create --amend bayrell/alpine_mariadb:10.4 \
+			bayrell/alpine_mariadb:10.4-$VERSION-amd64 \
+			bayrell/alpine_mariadb:10.4-$VERSION-arm32v7
+		docker manifest push --purge bayrell/alpine_mariadb:10.4
 	;;
 	
 	build-all)
