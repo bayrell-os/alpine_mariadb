@@ -35,8 +35,6 @@ case "$1" in
 	;;
 	
 	manifest)
-		#rm -rf ~/.docker/manifests/docker.io_bayrell_alpine_mariadb*
-		
 		docker manifest create --amend bayrell/alpine_mariadb:10.4-$VERSION \
 			bayrell/alpine_mariadb:10.4-$VERSION-amd64 \
 			bayrell/alpine_mariadb:10.4-$VERSION-arm32v7
@@ -48,14 +46,14 @@ case "$1" in
 		docker manifest push --purge bayrell/alpine_mariadb:10.4
 	;;
 	
-	build-all)
+	all)
 		$0 amd64
 		$0 arm32v7
 		$0 manifest
 	;;
 	
 	*)
-		echo "Usage: $0 {amd64|arm32v7|manifest|build-all|test|test-amd64|test-arm32v7}"
+		echo "Usage: $0 {amd64|arm32v7|manifest|all|test|test-amd64|test-arm32v7}"
 		RETVAL=1
 
 esac
