@@ -61,6 +61,14 @@ if [ ! -d /data/mysql ]; then
 fi
 
 
+if [ ! -z $MYSQL_ADMIN_PAGE ] && [ "$MYSQL_ADMIN_PAGE" = "1" ]; then
+	echo "Start nginx"
+	nginx
+	
+	echo "Start php7"
+	/usr/sbin/php-fpm7
+fi
+
 echo "Start MySQL"
 
 # Run MySQL
