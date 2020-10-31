@@ -6,9 +6,16 @@ Maria Database Server
 ## Enviroments
 
 MYSQL_ROOT_USERNAME - Root user name
+
 MYSQL_ROOT_PASSWORD - Root password
+
 MYSQL_ADMIN_PAGE - If equal 1 then run web admin page (not recommended, but sometimes can use)
 
+## Ports
+
+3306 - Mysql
+
+81 - Admin page
 
 ## Command line
 
