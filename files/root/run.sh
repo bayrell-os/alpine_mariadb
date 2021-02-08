@@ -44,7 +44,7 @@ if [ ! -d /data/mysql ]; then
 		
 		echo "Setup user" >> /data/install.log
 		mysql -h localhost -u root -e "CREATE USER '${MYSQL_ROOT_USERNAME}'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';" >> /data/install.log 2>&1
-		mysql -h localhost -u root -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_ROOT_USERNAME}'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';" >> /data/install.log 2>&1
+		mysql -h localhost -u root -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_ROOT_USERNAME}'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' WITH GRANT OPTION;" >> /data/install.log 2>&1
 		mysql -h localhost -u root -e "flush privileges;" >> /data/install.log 2>&1
 		
 	fi

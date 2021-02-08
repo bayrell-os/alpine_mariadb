@@ -1,10 +1,10 @@
 ARG ARCH=
-FROM ${ARCH}alpine:3.11
+FROM ${ARCH}alpine:3.13
 
 RUN cd ~; \
 	echo "" > /etc/apk/repositories; \
-	echo "https://mirror.yandex.ru/mirrors/alpine/v3.11/main" >> /etc/apk/repositories; \
-	echo "https://mirror.yandex.ru/mirrors/alpine/v3.11/community" >> /etc/apk/repositories; \
+	echo "https://mirror.yandex.ru/mirrors/alpine/v3.13/main" >> /etc/apk/repositories; \
+	echo "https://mirror.yandex.ru/mirrors/alpine/v3.13/community" >> /etc/apk/repositories; \
 	apk update; \
 	apk add bash nano mc net-tools grep; \
 	rm -rf /var/cache/apk/*; \
