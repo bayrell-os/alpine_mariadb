@@ -1,17 +1,8 @@
 ARG ARCH=
-FROM ${ARCH}alpine:3.13
+FROM bayrell/alpine:3.13-2${ARCH}
 
 RUN cd ~; \
-	echo "" > /etc/apk/repositories; \
-	echo "https://mirror.yandex.ru/mirrors/alpine/v3.13/main" >> /etc/apk/repositories; \
-	echo "https://mirror.yandex.ru/mirrors/alpine/v3.13/community" >> /etc/apk/repositories; \
 	apk update; \
-	apk add bash nano mc net-tools grep; \
-	rm -rf /var/cache/apk/*; \
-	echo "export EDITOR=nano" > /etc/profile.d/editor_nano; \
-	echo "Ok"
-
-RUN cd ~; \
 	apk add php7 php7-fpm php7-json php7-mbstring php7-openssl php7-session php7-pdo_mysql mariadb mariadb-client nginx; \
 	rm -rf /var/cache/apk/*; \
 	addgroup -g 800 -S www; \
@@ -69,7 +60,3 @@ RUN cd ~; \
 	rm -rf /src/files; \
 	chmod +x /root/run.sh; \
 	echo "Ok"
-
-VOLUME /data
-ENTRYPOINT ["/root/run.sh"]
-CMD []

@@ -6,31 +6,17 @@ BASE_PATH=`dirname $SCRIPT_PATH`
 
 RETVAL=0
 VERSION=10.5
-SUBVERSION=1
+SUBVERSION=2
 TAG=`date '+%Y%m%d_%H%M%S'`
 
 case "$1" in
 	
-	test)
-		docker build ./ -t bayrell/alpine_mariadb:$VERSION-$SUBVERSION-$TAG --file Dockerfile
-	;;
-	
-	test-amd64)
-		docker build ./ -t bayrell/alpine_mariadb:$VERSION-$SUBVERSION-$TAG-amd64 --file Dockerfile \
-			--build-arg ARCH=amd64/
-	;;
-	
-	test-arm32v7)
-		docker build ./ -t bayrell/alpine_mariadb:$VERSION-$SUBVERSION-$TAG-arm32v7 --file Dockerfile \
-			--build-arg ARCH=arm32v7/
-	;;
-	
 	amd64)
-		docker build ./ -t bayrell/alpine_mariadb:$VERSION-$SUBVERSION-amd64 --file Dockerfile --build-arg ARCH=amd64/
+		docker build ./ -t bayrell/alpine_mariadb:$VERSION-$SUBVERSION-amd64 --file Dockerfile --build-arg ARCH=-amd64
 	;;
 	
 	arm32v7)
-		docker build ./ -t bayrell/alpine_mariadb:$VERSION-$SUBVERSION-arm32v7 --file Dockerfile --build-arg ARCH=arm32v7/
+		docker build ./ -t bayrell/alpine_mariadb:$VERSION-$SUBVERSION-arm32v7 --file Dockerfile --build-arg ARCH=-arm32v7
 	;;
 	
 	manifest)
@@ -57,7 +43,7 @@ case "$1" in
 	;;
 	
 	*)
-		echo "Usage: $0 {amd64|arm32v7|manifest|all|test|test-amd64|test-arm32v7}"
+		echo "Usage: $0 {amd64|arm32v7|manifest|all}"
 		RETVAL=1
 
 esac
