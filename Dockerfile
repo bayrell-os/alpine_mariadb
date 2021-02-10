@@ -1,5 +1,5 @@
 ARG ARCH=
-FROM bayrell/alpine:3.13-2${ARCH}
+FROM bayrell/alpine:3.12-1${ARCH}
 
 RUN cd ~; \
 	apk update; \
