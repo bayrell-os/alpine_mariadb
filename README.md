@@ -58,8 +58,8 @@ services:
 			DOCKER_NODE_ID: {{.Node.ID}}
 			DOCKER_TASK_ID: {{.Task.ID}}
 			DOCKER_SERVICE_ID: {{.Service.ID}}
-			MYSQL_ROOT_USERNAME: "lasto4ka"
-            MYSQL_ROOT_PASSWORD: "7DF&d7jr!Lk5rZ^b"
+			MYSQL_ROOT_USERNAME: "root"
+			MYSQL_ROOT_PASSWORD: "mysqlrootpassword"
         deploy:
             replicas: 1
             endpoint_mode: dnsrr
